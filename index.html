@@ -7,11 +7,16 @@
     <style>
         /* --- DESIGN SETTINGS (CSS) --- */
         :root {
-            --primary-blue: #0b1d3a; /* Deep navy blue from the card */
-            --primary-red: #da2128; /* Red from the Ignite text */
-            --accent-orange: #f26522; /* Orange from the flame */
+            --primary-blue: #0b1d3a;
+            --primary-red: #da2128;
+            --accent-orange: #f26522;
             --text-color: #334155;
             --light-bg: #f8fafc;
+        }
+
+        /* Smooth scrolling for the whole page */
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -24,6 +29,7 @@
             font-family: 'Segoe UI', system-ui, sans-serif;
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Navigation */
@@ -33,22 +39,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
         
         .logo-img {
-            height: 60px; /* Adjust based on your logo.jpg dimensions */
+            height: 60px;
             width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
         }
 
         nav a {
-            margin-left: 1.5rem;
             text-decoration: none;
             color: var(--primary-blue);
             font-weight: 600;
+            position: relative;
             transition: color 0.3s ease;
         }
         
@@ -56,19 +73,48 @@
             color: var(--primary-red);
         }
 
+        /* Animated underline for nav links */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-blue) 0%, #1a365d 100%);
             color: #ffffff;
             text-align: center;
-            padding: 6rem 1rem;
+            padding: 8rem 1rem;
             border-bottom: 5px solid var(--primary-red);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
+            animation: slideDown 1s ease-out;
         }
 
         .hero h2 {
@@ -77,6 +123,7 @@
             margin-bottom: 2rem;
             color: #e2e8f0;
             letter-spacing: 2px;
+            animation: fadeIn 1.5s ease-out;
         }
 
         .hero-features {
@@ -87,26 +134,31 @@
             flex-wrap: wrap;
             font-size: 0.95rem;
             font-weight: 600;
+            animation: slideUp 1s ease-out;
         }
 
         .btn {
             display: inline-block;
             background: var(--primary-red);
             color: #ffffff;
-            padding: 0.75rem 2rem;
+            padding: 0.8rem 2.5rem;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px; /* Pill shape */
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(218, 33, 40, 0.3);
+            animation: scaleIn 1s ease-out;
         }
 
         .btn:hover {
             background: #b91c22;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(218, 33, 40, 0.4);
         }
 
-        /* Container for spacing */
+        /* Container & Section Styling */
         .container {
-            padding: 4rem 5%;
+            padding: 5rem 5%;
             max-width: 1200px;
             margin: auto;
         }
@@ -116,6 +168,7 @@
             font-size: 2.2rem;
             margin-bottom: 3rem;
             color: var(--primary-blue);
+            position: relative;
         }
 
         /* Services Section */
@@ -131,12 +184,14 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border-left: 4px solid var(--primary-red);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-orange);
         }
 
         .service-card h3 {
@@ -147,7 +202,7 @@
         /* Contact Section */
         .contact {
             background: var(--light-bg);
-            padding: 4rem 5%;
+            padding: 5rem 5%;
         }
 
         .contact-grid {
@@ -160,11 +215,17 @@
             padding: 3rem;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-grid:hover {
+            transform: scale(1.01);
         }
 
         .contact-info h3 {
             color: var(--primary-blue);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
         .contact-info p {
@@ -174,7 +235,7 @@
 
         .director-name {
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--primary-red);
         }
 
@@ -186,20 +247,93 @@
             padding: 2rem;
             font-size: 0.9rem;
         }
+
+        /* --- ANIMATIONS (Scroll Observer Classes) --- */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframe Animations for Hero Section */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- RESPONSIVE DESIGN (Mobile adjustments) --- */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                flex-direction: column;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            }
+
+            nav.active {
+                max-height: 200px;
+                padding: 1rem 0;
+            }
+
+            nav a {
+                padding: 0.5rem 2rem;
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- NAVIGATION -->
     <header>
         <a href="#">
             <img src="logo.jpg" alt="Ignite Verve Logo" class="logo-img">
         </a>
-        <nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        <nav id="navMenu">
             <a href="#services">Services</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
+    <!-- HERO SECTION -->
     <section class="hero">
         <h1>IGNITE VERVE</h1>
         <h2>IGNITE IDEAS. INSPIRE GROWTH.</h2>
@@ -214,26 +348,28 @@
         <a href="#contact" class="btn">Get in Touch</a>
     </section>
 
+    <!-- SERVICES SECTION -->
     <section id="services" class="container">
-        <h2 class="section-title">Our Services</h2>
+        <h2 class="section-title hidden">Our Services</h2>
         <div class="services">
-            <div class="service-card"><h3>Government Consultancy</h3></div>
-            <div class="service-card"><h3>MSME & Startup Advisory</h3></div>
-            <div class="service-card"><h3>Project Planning & Management</h3></div>
-            <div class="service-card"><h3>Bid & Tender Support</h3></div>
-            <div class="service-card"><h3>Policy & Compliance Advisory</h3></div>
-            <div class="service-card"><h3>Capacity Building & Training</h3></div>
-            <div class="service-card"><h3>Manpower</h3></div>
-            <div class="service-card"><h3>Housekeeping Services</h3></div>
-            <div class="service-card"><h3>Security Guard Services</h3></div>
-            <div class="service-card"><h3>Consultancy Services</h3></div>
-            <div class="service-card"><h3>Lab Testing</h3></div>
+            <div class="service-card hidden"><h3>Government Consultancy</h3></div>
+            <div class="service-card hidden"><h3>MSME & Startup Advisory</h3></div>
+            <div class="service-card hidden"><h3>Project Planning & Management</h3></div>
+            <div class="service-card hidden"><h3>Bid & Tender Support</h3></div>
+            <div class="service-card hidden"><h3>Policy & Compliance Advisory</h3></div>
+            <div class="service-card hidden"><h3>Capacity Building & Training</h3></div>
+            <div class="service-card hidden"><h3>Manpower</h3></div>
+            <div class="service-card hidden"><h3>Housekeeping Services</h3></div>
+            <div class="service-card hidden"><h3>Security Guard Services</h3></div>
+            <div class="service-card hidden"><h3>Consultancy Services</h3></div>
+            <div class="service-card hidden"><h3>Lab Testing</h3></div>
         </div>
     </section>
 
+    <!-- CONTACT SECTION -->
     <section id="contact" class="contact">
-        <h2 class="section-title">Contact Us</h2>
-        <div class="contact-grid">
+        <h2 class="section-title hidden">Contact Us</h2>
+        <div class="contact-grid hidden">
             <div class="contact-info">
                 <p class="director-name">Nand Kishore Dangi</p>
                 <p style="color: gray; margin-top: -10px; margin-bottom: 20px;">DIRECTOR</p>
@@ -249,14 +385,62 @@
                 <h3>Contact Details</h3>
                 <p><strong>Email:</strong> igniteverve2025@gmail.com</p>
                 <p><strong>Phone:</strong> 8804202943 <br> <strong>Alt:</strong> +91 878 974 0550</p>
-                <p><strong>Website:</strong> www.igniteverve.com</p>
+                <p><strong>Website:</strong> <a href="http://www.igniteverve.com" style="color: var(--primary-blue); text-decoration: none;">www.igniteverve.com</a></p>
             </div>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Ignite Verve Consultancy Private Limited. All rights reserved.</p>
+        <p>&copy; <span id="currentYear"></span> Ignite Verve Consultancy Private Limited. All rights reserved.</p>
     </footer>
 
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // 1. Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Toggle hamburger icon to an 'X'
+            if (navMenu.classList.contains('active')) {
+                mobileMenuBtn.innerHTML = '✕';
+            } else {
+                mobileMenuBtn.innerHTML = '☰';
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '☰';
+            });
+        });
+
+        // 2. Scroll Animation Observer (Fade/Slide up on scroll)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Triggers when 10% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); // Stop observing once it appears
+                }
+            });
+        }, observerOptions);
+
+        // Select all elements with the 'hidden' class and observe them
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        // 3. Dynamic Copyright Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
