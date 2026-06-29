@@ -4,661 +4,518 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ignite Verve Consultancy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- DESIGN SETTINGS (CSS) --- */
         :root {
-            --brand-navy: #0b1d3a;
-            --brand-red: #da2128;
-            --brand-orange: #f26522;
-            --text-main: #1d1d1f; /* Apple's standard dark gray */
-            --text-muted: #86868b;
-            --bg-light: #fbfbfd;
-            --bg-white: #ffffff;
-            --gradient-accent: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
+            --primary-blue: #0b1d3a;
+            --primary-red: #da2128;
+            --accent-orange: #f26522;
+            --text-color: #334155;
+            --light-bg: #f8fafc;
         }
 
-        /* Reset & Base */
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
-        }
-
         body {
-            line-height: 1.5;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
             overflow-x: hidden;
+            background-color: var(--light-bg);
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3, h4 {
-            letter-spacing: -0.02em;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* --- NAVIGATION (Glassmorphism) --- */
+        /* Navigation */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            z-index: 1000;
+            background: #ffffff;
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--brand-navy);
-            text-decoration: none;
-            letter-spacing: -0.5px;
+        .logo-img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
         }
 
-        .logo-text span {
-            color: var(--brand-red);
+        .logo-img:hover {
+            transform: scale(1.05);
         }
 
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.5rem;
         }
 
         nav a {
             text-decoration: none;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            font-weight: 500;
+            color: var(--primary-blue);
+            font-weight: 600;
+            position: relative;
             transition: color 0.3s ease;
         }
         
         nav a:hover {
-            color: var(--brand-red);
+            color: var(--primary-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         .mobile-menu-btn {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: none;
             border: none;
+            color: var(--primary-blue);
             cursor: pointer;
-            color: var(--text-main);
         }
 
-        /* --- HERO SECTION --- */
+        /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 5% 4rem;
-            background: #000000; /* Deep premium black for the hero */
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a365d 100%);
             color: #ffffff;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(218,33,40,0.15) 0%, rgba(0,0,0,0) 50%);
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1000px;
+            text-align: center;
+            padding: 8rem 1rem;
+            border-bottom: 5px solid var(--primary-red);
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            animation: slideDown 1s ease-out;
         }
 
         .hero h2 {
-            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-size: 1.5rem;
             font-weight: 400;
-            color: #86868b;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            color: #e2e8f0;
+            letter-spacing: 2px;
+            animation: fadeIn 1.5s ease-out;
         }
 
-        .btn-primary {
-            background: var(--bg-white);
-            color: var(--text-main);
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            text-decoration: none;
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 1s ease-out;
+        }
+
+        .btn {
             display: inline-block;
+            background: var(--primary-red);
+            color: #ffffff;
+            padding: 0.8rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(218, 33, 40, 0.3);
+            animation: scaleIn 1s ease-out;
         }
 
-        .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        .btn:hover {
+            background: #b91c22;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(218, 33, 40, 0.4);
         }
 
-        /* --- ABOUT SECTION --- */
+        /* Container & Section Styling */
         .container {
-            padding: 8rem 5%;
-            max-width: 1400px;
+            padding: 5rem 5%;
+            max-width: 1300px;
             margin: auto;
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
+        .section-title {
+            text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--brand-navy);
+            margin-bottom: 4rem;
+            color: var(--primary-blue);
+            font-weight: 800;
         }
 
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .about-stats {
+        /* --- DYNAMIC SERVICES SECTION --- */
+        .services {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            background: var(--bg-white);
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-        }
-
-        .stat-item h4 {
-            font-size: 3rem;
-            color: var(--brand-red);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* --- SERVICES SECTION --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .service-card {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            cursor: pointer;
             border: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+        }
+
+        /* The sweeping background animation */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
+            transition: height 0.4s ease-out;
+            z-index: 0;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border-color: rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(218, 33, 40, 0.2);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        /* Card Content Wrapper (stays above the sweep) */
+        .card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            background: var(--bg-light);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
+            color: var(--primary-blue);
+            transition: color 0.4s ease;
         }
 
         .service-card h3 {
+            color: var(--primary-blue);
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: var(--text-main);
+            font-weight: 700;
+            transition: color 0.4s ease;
         }
 
         .service-card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* --- WHY CHOOSE US (Dark Section) --- */
-        .why-us {
-            background: var(--brand-navy);
-            color: white;
-        }
-
-        .why-us .section-title, .why-us .section-subtitle {
-            color: white;
-        }
-
-        .why-us .section-subtitle {
-            opacity: 0.8;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .feature-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-
-        .feature-item p {
-            color: #a0aec0;
+            color: var(--text-color);
             font-size: 0.95rem;
+            line-height: 1.6;
+            transition: color 0.4s ease;
         }
 
-        /* --- CONTACT SECTION --- */
-        .contact-wrapper {
+        /* Change text colors to white on hover */
+        .service-card:hover .card-icon,
+        .service-card:hover h3,
+        .service-card:hover p {
+            color: #ffffff;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #ffffff;
+            padding: 5rem 5%;
+        }
+
+        .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            background: var(--bg-white);
-            border-radius: 30px;
-            padding: 4rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: auto;
+            background: var(--light-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-blue);
         }
 
         .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .info-block {
-            margin-bottom: 2rem;
-        }
-        
-        .info-block h5 {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-block p {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .director-badge {
-            display: inline-block;
-            background: var(--bg-light);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            margin-top: 2rem;
-            border-left: 4px solid var(--brand-red);
-        }
-
-        .director-badge p.name {
-            font-weight: 700;
-            color: var(--brand-navy);
-            font-size: 1.1rem;
-        }
-
-        .director-badge p.title {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: var(--bg-light);
-            padding: 4rem 5% 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-muted);
+            color: var(--primary-blue);
             margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
-        .footer-links {
-            margin-bottom: 2rem;
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
         }
 
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin: 0 1rem;
+        .director-name {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: var(--primary-red);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
             font-size: 0.9rem;
         }
 
-        .copyright {
-            color: #a1a1a6;
-            font-size: 0.85rem;
-        }
-
-        /* --- SCROLL ANIMATIONS --- */
-        .reveal {
+        /* Scroll Animation Classes */
+        .hidden {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
         }
 
-        .reveal.active {
+        .show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 992px) {
-            .about-grid, .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .contact-wrapper {
-                padding: 2rem;
-            }
-        }
+        /* Keyframes */
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .mobile-menu-btn { display: block; }
             nav {
                 position: absolute; top: 100%; left: 0; width: 100%;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column; gap: 0;
-                max-height: 0; overflow: hidden;
-                transition: max-height 0.4s ease;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
+                background: #ffffff; flex-direction: column; padding: 0;
+                max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             }
-            nav.active { max-height: 400px; }
-            nav a { padding: 1.5rem 2rem; border-bottom: 1px solid rgba(0,0,0,0.05); display: block; }
-            .section-title { font-size: 2.2rem; }
-            .hero { padding-top: 6rem; }
+            nav.active { max-height: 250px; padding: 1rem 0; }
+            nav a { padding: 0.8rem 2rem; display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-features { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo-text">Ignite<span>Verve.</span></a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
+        <a href="#">
+            <img src="logo.jpg" alt="Ignite Verve Logo" class="logo-img">
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         <nav id="navMenu">
-            <a href="#about">About</a>
             <a href="#services">Services</a>
-            <a href="#why-us">Why Us</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1 class="reveal active">Ignite Ideas.<br>Inspire Growth.</h1>
-            <h2 class="reveal active" style="transition-delay: 0.1s;">Expert consultancy driving sustainable growth, strategic expansion, and operational excellence for modern enterprises.</h2>
-            <a href="#contact" class="btn-primary reveal active" style="transition-delay: 0.2s;">Partner With Us</a>
-        </div>
-    </section>
-
-    <section id="about" class="container">
-        <div class="about-grid reveal">
-            <div class="about-text">
-                <h3>Transforming visions into measurable reality.</h3>
-                <p>At Ignite Verve Consultancy, we bridge the gap between complex regulatory frameworks and seamless business operations. Whether you are a startup finding your footing or an established enterprise navigating government compliance, we provide the clarity and strategy you need.</p>
-                <p>We believe in a result-driven approach, anchored by trust, transparency, and an unwavering commitment to your sustainable growth.</p>
-            </div>
-            <div class="about-stats">
-                <div class="stat-item">
-                    <h4>100%</h4>
-                    <p>Client Dedication</p>
-                </div>
-                <div class="stat-item">
-                    <h4>360°</h4>
-                    <p>Business Solutions</p>
-                </div>
-                <div class="stat-item">
-                    <h4>24/7</h4>
-                    <p>Expert Support</p>
-                </div>
-                <div class="stat-item">
-                    <h4>0</h4>
-                    <p>Compromise on Quality</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="container" style="background-color: var(--bg-light);">
-        <h2 class="section-title reveal">Our Services.</h2>
-        <p class="section-subtitle reveal">Comprehensive solutions tailored to empower your business at every stage of its lifecycle.</p>
+        <h1>IGNITE VERVE</h1>
+        <h2>IGNITE IDEAS. INSPIRE GROWTH.</h2>
         
-        <div class="services-grid">
-            <div class="service-card reveal">
-                <div class="card-icon">🏛️</div>
-                <h3>Government Consultancy</h3>
-                <p>Strategic advisory and seamless liaising to help you navigate complex regulatory frameworks and public policies efficiently.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">🚀</div>
-                <h3>MSME & Startup Advisory</h3>
-                <p>End-to-end business modeling, financial structuring, and scalability strategies tailored specifically for emerging enterprises.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">📊</div>
-                <h3>Project Management</h3>
-                <p>Comprehensive execution from blueprint to delivery, ensuring your timelines, resources, and budgets are strictly maintained.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">📝</div>
-                <h3>Bid & Tender Support</h3>
-                <p>Expert assistance in discovering, drafting, and successfully submitting highly competitive government and private tenders.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">⚖️</div>
-                <h3>Compliance Advisory</h3>
-                <p>Protecting your business by ensuring absolute alignment with the latest industry regulations and stringent legal standards.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">👥</div>
-                <h3>Manpower & Training</h3>
-                <p>Sourcing skilled personnel and empowering your existing workforce through targeted professional development programs.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">✨</div>
-                <h3>Facility Management</h3>
-                <p>Providing top-tier housekeeping and maintenance to ensure pristine, hygienic, and welcoming commercial environments.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">🛡️</div>
-                <h3>Security Services</h3>
-                <p>Deploying highly trained, professional security personnel to guarantee the absolute safety of your assets and premises.</p>
-            </div>
-
-            <div class="service-card reveal">
-                <div class="card-icon">🔬</div>
-                <h3>Lab Testing & QA</h3>
-                <p>Delivering accurate, certified, and highly efficient testing solutions to ensure quality control and product assurance.</p>
-            </div>
+        <div class="hero-features">
+            <span>✓ RESULT DRIVEN APPROACH</span>
+            <span>✓ EXPERT TEAM SUPPORT</span>
+            <span>✓ TRUST & TRANSPARENCY</span>
+            <span>✓ SUSTAINABLE GROWTH</span>
         </div>
+
+        <a href="#contact" class="btn">Get in Touch</a>
     </section>
 
-    <section id="why-us" class="why-us container" style="max-width: 100%; padding: 8rem 5%;">
-        <div style="max-width: 1400px; margin: auto;">
-            <h2 class="section-title reveal">The Ignite Advantage.</h2>
-            <p class="section-subtitle reveal">Why industry leaders trust us to guide their most critical operations.</p>
+    <section id="services" class="container">
+        <h2 class="section-title hidden">Our Services</h2>
+        <div class="services">
             
-            <div class="features-grid">
-                <div class="feature-item reveal">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
-                    <h4>Result-Driven</h4>
-                    <p>We don't just offer advice; we execute strategies that yield measurable, tangible outcomes.</p>
-                </div>
-                <div class="feature-item reveal">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
-                    <h4>Absolute Transparency</h4>
-                    <p>Clear communication, honest assessments, and no hidden agendas in our partnerships.</p>
-                </div>
-                <div class="feature-item reveal">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
-                    <h4>Agile Execution</h4>
-                    <p>Adapting quickly to market changes and regulatory shifts to keep your business ahead.</p>
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Government Consultancy</h3>
+                    <p>Strategic advisory and seamless liaising to help you navigate complex government regulatory frameworks and policies.</p>
                 </div>
             </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🚀</div>
+                    <h3>MSME & Startup Advisory</h3>
+                    <p>End-to-end business modeling, financial structuring, and growth strategies tailored for emerging enterprises.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">📊</div>
+                    <h3>Project Planning & Management</h3>
+                    <p>Comprehensive project execution from blueprint to delivery, ensuring timelines and budgets are strictly maintained.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">📝</div>
+                    <h3>Bid & Tender Support</h3>
+                    <p>Expert assistance in discovering, drafting, and successfully submitting highly competitive government and private tenders.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Policy & Compliance Advisory</h3>
+                    <p>Protecting your business by ensuring total alignment with the latest industry regulations and legal standards.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">💡</div>
+                    <h3>Capacity Building & Training</h3>
+                    <p>Empowering your workforce through targeted skill development programs and high-impact professional training.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">👥</div>
+                    <h3>Manpower</h3>
+                    <p>Sourcing and deploying skilled, reliable, and vetted personnel specifically tailored to meet your organizational demands.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">✨</div>
+                    <h3>Housekeeping Services</h3>
+                    <p>Providing top-tier facility management to maintain pristine, hygienic, and welcoming environments for commercial spaces.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Security Guard Services</h3>
+                    <p>Deploying highly trained and professional security personnel to guarantee the absolute safety of your assets and premises.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🤝</div>
+                    <h3>Consultancy Services</h3>
+                    <p>Providing expert insights, risk assessment, and customized strategies across a wide spectrum of business domains.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🔬</div>
+                    <h3>Lab Testing</h3>
+                    <p>Delivering accurate, certified, and highly efficient testing solutions to ensure quality control and product assurance.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section id="contact" class="container">
-        <h2 class="section-title reveal">Get in touch.</h2>
-        <p class="section-subtitle reveal">Ready to transform your business operations? Reach out to our team today.</p>
-        
-        <div class="contact-wrapper reveal">
-            <div>
-                <h3>Contact Information</h3>
+    <section id="contact" class="contact">
+        <h2 class="section-title hidden">Contact Us</h2>
+        <div class="contact-grid hidden">
+            <div class="contact-info">
+                <p class="director-name">Nand Kishore Dangi</p>
+                <p style="color: gray; margin-top: -10px; margin-bottom: 20px;">DIRECTOR</p>
                 
-                <div class="info-block">
-                    <h5>Email</h5>
-                    <p>igniteverve2025@gmail.com</p>
-                </div>
-                
-                <div class="info-block">
-                    <h5>Phone</h5>
-                    <p>8804202943</p>
-                    <p style="color: var(--text-muted); font-size: 1rem;">+91 878 974 0550</p>
-                </div>
-
-                <div class="director-badge">
-                    <p class="name">Nand Kishore Dangi</p>
-                    <p class="title">Director</p>
-                </div>
+                <h3>Office Address</h3>
+                <p>Floor No.: 3, Flat No.: 301,<br>
+                Guru Kripa Mansion, SN Yadav Road,<br>
+                Burdwan Compound, Nagra Toli,<br>
+                Ranchi, Jharkhand - 834001</p>
             </div>
             
-            <div>
-                <h3>Corporate Office</h3>
-                <div class="info-block">
-                    <h5>Address</h5>
-                    <p style="line-height: 1.8;">
-                        Floor No.: 3, Flat No.: 301<br>
-                        Guru Kripa Mansion, SN Yadav Road<br>
-                        Burdwan Compound, Nagra Toli<br>
-                        Ranchi, Jharkhand - 834001
-                    </p>
-                </div>
-                <div style="width: 100%; height: 200px; background: #f1f1f4; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #86868b; margin-top: 2rem;">
-                    [ Location Map Integration ]
-                </div>
+            <div class="contact-info">
+                <h3>Contact Details</h3>
+                <p><strong>Email:</strong> igniteverve2025@gmail.com</p>
+                <p><strong>Phone:</strong> 8804202943 <br> <strong>Alt:</strong> +91 878 974 0550</p>
+                <p><strong>Website:</strong> <a href="http://www.igniteverve.com" style="color: var(--primary-blue); text-decoration: none;">www.igniteverve.com</a></p>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-logo">IgniteVerve.</div>
-        <div class="footer-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <p class="copyright">&copy; <span id="currentYear"></span> Ignite Verve Consultancy Private Limited. All rights reserved.</p>
+        <p>&copy; <span id="currentYear"></span> Ignite Verve Consultancy Private Limited. All rights reserved.</p>
     </footer>
 
     <script>
-        // Mobile Menu Logic
+        // Mobile Menu Toggle Logic
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
-        const menuIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
-        const closeIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
 
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? closeIcon : menuIcon;
+            if (navMenu.classList.contains('active')) {
+                mobileMenuBtn.innerHTML = '✕';
+            } else {
+                mobileMenuBtn.innerHTML = '☰';
+            }
         });
 
         document.querySelectorAll('#navMenu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = menuIcon;
+                mobileMenuBtn.innerHTML = '☰';
             });
         });
 
-        // Intersection Observer for Apple-style Reveal Animations
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
+        // Scroll Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
         };
 
-        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); 
+                }
             });
-        }, revealOptions);
+        }, observerOptions);
 
-        revealElements.forEach(el => revealOnScroll.observe(el));
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
 
-        // Set Dynamic Year
+        // Dynamic Copyright Year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
