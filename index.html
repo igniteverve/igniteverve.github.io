@@ -14,7 +14,7 @@
             --light-bg: #f8fafc;
         }
 
-        /* Smooth scrolling for the whole page */
+        /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
@@ -30,6 +30,7 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            background-color: var(--light-bg);
         }
 
         /* Navigation */
@@ -43,7 +44,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
         }
         
         .logo-img {
@@ -73,7 +73,6 @@
             color: var(--primary-red);
         }
 
-        /* Animated underline for nav links */
         nav a::after {
             content: '';
             position: absolute;
@@ -89,7 +88,6 @@
             width: 100%;
         }
 
-        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             font-size: 1.8rem;
@@ -106,8 +104,6 @@
             text-align: center;
             padding: 8rem 1rem;
             border-bottom: 5px solid var(--primary-red);
-            position: relative;
-            overflow: hidden;
         }
 
         .hero h1 {
@@ -143,7 +139,7 @@
             color: #ffffff;
             padding: 0.8rem 2.5rem;
             text-decoration: none;
-            border-radius: 50px; /* Pill shape */
+            border-radius: 50px;
             font-weight: bold;
             transition: all 0.3s;
             box-shadow: 0 4px 6px rgba(218, 33, 40, 0.3);
@@ -159,49 +155,101 @@
         /* Container & Section Styling */
         .container {
             padding: 5rem 5%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
             color: var(--primary-blue);
-            position: relative;
+            font-weight: 800;
         }
 
-        /* Services Section */
+        /* --- DYNAMIC SERVICES SECTION --- */
         .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .service-card {
             background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--primary-red);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
             cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* The sweeping background animation */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-orange));
+            transition: height 0.4s ease-out;
+            z-index: 0;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--accent-orange);
+            box-shadow: 0 20px 40px rgba(218, 33, 40, 0.2);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        /* Card Content Wrapper (stays above the sweep) */
+        .card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            transition: color 0.4s ease;
         }
 
         .service-card h3 {
             color: var(--primary-blue);
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            transition: color 0.4s ease;
+        }
+
+        .service-card p {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: color 0.4s ease;
+        }
+
+        /* Change text colors to white on hover */
+        .service-card:hover .card-icon,
+        .service-card:hover h3,
+        .service-card:hover p {
+            color: #ffffff;
         }
 
         /* Contact Section */
         .contact {
-            background: var(--light-bg);
+            background: #ffffff;
             padding: 5rem 5%;
         }
 
@@ -211,15 +259,11 @@
             gap: 2rem;
             max-width: 1000px;
             margin: auto;
-            background: #fff;
+            background: var(--light-bg);
             padding: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .contact-grid:hover {
-            transform: scale(1.01);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-blue);
         }
 
         .contact-info h3 {
@@ -248,7 +292,7 @@
             font-size: 0.9rem;
         }
 
-        /* --- ANIMATIONS (Scroll Observer Classes) --- */
+        /* Scroll Animation Classes */
         .hidden {
             opacity: 0;
             transform: translateY(30px);
@@ -260,68 +304,30 @@
             transform: translateY(0);
         }
 
-        /* Keyframe Animations for Hero Section */
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        /* Keyframes */
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
-        /* --- RESPONSIVE DESIGN (Mobile adjustments) --- */
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
+            .mobile-menu-btn { display: block; }
             nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #ffffff;
-                flex-direction: column;
-                padding: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease-out;
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: #ffffff; flex-direction: column; padding: 0;
+                max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             }
-
-            nav.active {
-                max-height: 200px;
-                padding: 1rem 0;
-            }
-
-            nav a {
-                padding: 0.5rem 2rem;
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-features {
-                flex-direction: column;
-                gap: 1rem;
-            }
+            nav.active { max-height: 250px; padding: 1rem 0; }
+            nav a { padding: 0.8rem 2rem; display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-features { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
     <header>
         <a href="#">
             <img src="logo.jpg" alt="Ignite Verve Logo" class="logo-img">
@@ -333,7 +339,6 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <h1>IGNITE VERVE</h1>
         <h2>IGNITE IDEAS. INSPIRE GROWTH.</h2>
@@ -348,25 +353,101 @@
         <a href="#contact" class="btn">Get in Touch</a>
     </section>
 
-    <!-- SERVICES SECTION -->
     <section id="services" class="container">
         <h2 class="section-title hidden">Our Services</h2>
         <div class="services">
-            <div class="service-card hidden"><h3>Government Consultancy</h3></div>
-            <div class="service-card hidden"><h3>MSME & Startup Advisory</h3></div>
-            <div class="service-card hidden"><h3>Project Planning & Management</h3></div>
-            <div class="service-card hidden"><h3>Bid & Tender Support</h3></div>
-            <div class="service-card hidden"><h3>Policy & Compliance Advisory</h3></div>
-            <div class="service-card hidden"><h3>Capacity Building & Training</h3></div>
-            <div class="service-card hidden"><h3>Manpower</h3></div>
-            <div class="service-card hidden"><h3>Housekeeping Services</h3></div>
-            <div class="service-card hidden"><h3>Security Guard Services</h3></div>
-            <div class="service-card hidden"><h3>Consultancy Services</h3></div>
-            <div class="service-card hidden"><h3>Lab Testing</h3></div>
+            
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Government Consultancy</h3>
+                    <p>Strategic advisory and seamless liaising to help you navigate complex government regulatory frameworks and policies.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🚀</div>
+                    <h3>MSME & Startup Advisory</h3>
+                    <p>End-to-end business modeling, financial structuring, and growth strategies tailored for emerging enterprises.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">📊</div>
+                    <h3>Project Planning & Management</h3>
+                    <p>Comprehensive project execution from blueprint to delivery, ensuring timelines and budgets are strictly maintained.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">📝</div>
+                    <h3>Bid & Tender Support</h3>
+                    <p>Expert assistance in discovering, drafting, and successfully submitting highly competitive government and private tenders.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Policy & Compliance Advisory</h3>
+                    <p>Protecting your business by ensuring total alignment with the latest industry regulations and legal standards.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">💡</div>
+                    <h3>Capacity Building & Training</h3>
+                    <p>Empowering your workforce through targeted skill development programs and high-impact professional training.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">👥</div>
+                    <h3>Manpower</h3>
+                    <p>Sourcing and deploying skilled, reliable, and vetted personnel specifically tailored to meet your organizational demands.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">✨</div>
+                    <h3>Housekeeping Services</h3>
+                    <p>Providing top-tier facility management to maintain pristine, hygienic, and welcoming environments for commercial spaces.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Security Guard Services</h3>
+                    <p>Deploying highly trained and professional security personnel to guarantee the absolute safety of your assets and premises.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🤝</div>
+                    <h3>Consultancy Services</h3>
+                    <p>Providing expert insights, risk assessment, and customized strategies across a wide spectrum of business domains.</p>
+                </div>
+            </div>
+
+            <div class="service-card hidden">
+                <div class="card-content">
+                    <div class="card-icon">🔬</div>
+                    <h3>Lab Testing</h3>
+                    <p>Delivering accurate, certified, and highly efficient testing solutions to ensure quality control and product assurance.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact" class="contact">
         <h2 class="section-title hidden">Contact Us</h2>
         <div class="contact-grid hidden">
@@ -390,20 +471,17 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <p>&copy; <span id="currentYear"></span> Ignite Verve Consultancy Private Limited. All rights reserved.</p>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT -->
     <script>
-        // 1. Mobile Menu Toggle Logic
+        // Mobile Menu Toggle Logic
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
 
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            // Toggle hamburger icon to an 'X'
             if (navMenu.classList.contains('active')) {
                 mobileMenuBtn.innerHTML = '✕';
             } else {
@@ -411,7 +489,6 @@
             }
         });
 
-        // Close mobile menu when a link is clicked
         document.querySelectorAll('#navMenu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -419,27 +496,26 @@
             });
         });
 
-        // 2. Scroll Animation Observer (Fade/Slide up on scroll)
+        // Scroll Animation Observer
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1 // Triggers when 10% of the element is visible
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show');
-                    observer.unobserve(entry.target); // Stop observing once it appears
+                    observer.unobserve(entry.target); 
                 }
             });
         }, observerOptions);
 
-        // Select all elements with the 'hidden' class and observe them
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // 3. Dynamic Copyright Year
+        // Dynamic Copyright Year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
